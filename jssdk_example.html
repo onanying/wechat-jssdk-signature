@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>微信JS-SDK获取地理位置</title>
+    </head>
+    <body>
+
+    </body>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="/jssdk-config.js"></script>
+    <script type="text/javascript">
+
+        // 配置成功后执行
+        wx.ready(function(){
+
+            // 获取地理位置
+            wx.getLocation({
+                type: 'wgs84',
+                success: function (res) {
+                    console.log(res);
+                    var latitude = res.latitude;
+                    var longitude = res.longitude;
+                    var speed = res.speed;
+                    var accuracy = res.accuracy;
+                    alert("latitude:" + latitude + " / latitude:" + longitude);
+                }
+            });
+
+        });
+
+    </script>
+</html>
