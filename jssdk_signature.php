@@ -36,4 +36,9 @@ $output = array(
     'timestamp' => $timestamp,
     'signature' => $signature,
 );
-echo json_encode($output);
+// jsonp自适应
+if (!empty($_GET['callbak'])) {
+    echo $_GET['callbak'] . '(' . json_encode($output) . ')'; // jsonp
+} else {
+    echo json_encode($output); // json
+}
