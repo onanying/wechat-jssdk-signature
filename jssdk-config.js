@@ -1,7 +1,7 @@
 
 // 用户配置
 var appId = '****************';
-var baseUrl = 'http://www.****.com/'; // jssdk_signature.php所在目录的URL
+var baseUrl = 'http://www.****.com/wxjssdk/'; // jssdk_signature.php所在目录的URL
 var jsApiList = ['getLocation', 'chooseWXPay', 'openLocation']; // 微信JS接口列表
 
 // 随机字符串
