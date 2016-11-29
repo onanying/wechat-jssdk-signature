@@ -1,6 +1,8 @@
 
 // 用户配置
 var appId = '****************';
+var baseUrl = 'http://www.****.com/'; // jssdk_signature.php所在目录的URL
+var jsApiList = ['getLocation', 'chooseWXPay', 'openLocation']; // 微信JS接口列表
 
 // 随机字符串
 function nonceStr(){
@@ -16,7 +18,7 @@ var timestamp = parseInt(new Date().getTime()/1000);
 var url = window.location.href.replace(window.location.hash, "");
 
 // 获取签名
-$.getJSON("/jssdk_signature.php?noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + url, function(json){
+$.getJSON(baseUrl + "jssdk_signature.php?noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + url + "&callbak=?", function(json){
     // 配置JS-SDK
     wx.config({
         debug: false,
@@ -24,6 +26,6 @@ $.getJSON("/jssdk_signature.php?noncestr=" + nonceStr + "&timestamp=" + timestam
         timestamp: json.timestamp,
         nonceStr: json.noncestr,
         signature: json.signature,
-        jsApiList: ['getLocation', 'chooseWXPay']
+        jsApiList: jsApiList
     });
 });

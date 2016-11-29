@@ -12,12 +12,13 @@ define('CONF_APP_ID', '****************');
 define('CONF_APP_SECRET', '********************************');
 ```
 
-打开 jssdk-config.js 修改 appId
-
+打开 jssdk-config.js 修改 appId、baseUrl、jsApiList
 
 ```javascript
 // 用户配置
 var appId = '****************';
+var baseUrl = 'http://www.****.com/'; // jssdk_signature.php所在目录的URL
+var jsApiList = ['getLocation', 'chooseWXPay', 'openLocation']; // 微信JS接口列表
 ```
 
 ### 使用范例 

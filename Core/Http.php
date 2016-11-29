@@ -13,18 +13,18 @@ class Http
      * http GET请求
      * @author 刘健 <59208859@qq.com>
      */
-    public static function get($url, $timeout = null)
+    public static function get($url, $settings = null)
     {
-        return self::curl($url, 'GET', null, $timeout);
+        return self::curl($url, 'GET', null, $settings);
     }
 
     /**
      * http POST请求
      * @author 刘健 <59208859@qq.com>
      */
-    public static function post($url, $data, $timeout = null)
+    public static function post($url, $data, $settings = null)
     {
-        return self::curl($url, 'POST', $data, $timeout);
+        return self::curl($url, 'POST', $data, $settings);
     }
 
     /**
@@ -32,7 +32,7 @@ class Http
      * @author 刘健 <59208859@qq.com>
      * 需要开启curl扩展
      */
-    public static function curl($url, $type = 'GET', $data = null, $timeout = null)
+    public static function curl($url, $type = 'GET', $data = null, $settings = null)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -44,13 +44,13 @@ class Http
         curl_setopt($ch, CURLOPT_AUTOREFERER, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         is_null($data) or curl_setopt($ch, CURLOPT_POSTFIELDS, $data); // $data为数组
-        is_null($timeout) or curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+        !isset($settings['timeout']) or curl_setopt($ch, CURLOPT_TIMEOUT, $settings['timeout']);
         $response = curl_exec($ch);
         if ($error = curl_error($ch)) {
             throw new Exception('http_curl error: ' . $error);
         }
         curl_close($ch);
-        return $response;
+        return empty($settings['rawdata']) ? json_decode($response) : $response;
     }
 
 }

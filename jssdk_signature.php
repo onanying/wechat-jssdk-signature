@@ -13,18 +13,17 @@ include 'config.php';
 $noncestr = isset($_GET["noncestr"]) ? $_GET["noncestr"] : null;
 $timestamp = isset($_GET["timestamp"]) ? $_GET["timestamp"] : null;
 $url = isset($_GET["url"]) ? $_GET["url"] : null;
-
 if (is_null($noncestr) || is_null($timestamp) || is_null($url)) {
     die('params noncestr,timestamp,url not null');
 }
 
 // 签名计算
-$jsapi = Core\Session::jsapiTicket();
+$wechat = Core\Wechat::jsapiTicket();
 $urlArr = array(
     'noncestr=' . $noncestr,
     'timestamp=' . $timestamp,
     'url=' . $url,
-    'jsapi_ticket=' . $jsapi->ticket,
+    'jsapi_ticket=' . $wechat->ticket,
 );
 sort($urlArr, SORT_STRING);
 $signature = implode('&', $urlArr);
