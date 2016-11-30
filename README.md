@@ -67,3 +67,17 @@ var jsApiList = ['getLocation', 'chooseWXPay', 'openLocation']; // 微信JS接�
 ### 注意安全
 
 因为 access_token、jsapi_ticket 做的是文件缓存，存放在 Cache 目录里，所以不要让别人知道你的url了，不然别人可以直接下载，我还是建议大家存到redis,memcache里去，修改下Core目录的Cache类就可以了，很简单的。
+
+### 微信挖的坑
+
+微信的签名算法要提供调用页面的url，文档是这样写的
+
+- url=http://mp.weixin.qq.com?params=value
+
+看上面应该是支持带参数的page，但是和上面写的一样，竟然只支持一个get参数，也就是说下面这样的多个参数的page不支持，会报签名错误
+
+- url=http://mp.weixin.qq.com?params1=value1&params2=value2
+
+要传多个值，就只能自己想办法咯，比如
+
+- url=http://mp.weixin.qq.com?params=value1,value2
