@@ -2,6 +2,12 @@
 
 微信JSSDK服务端生成签名认证，包含后端PHP与前端JS的实现，后端缓存access_token、jsapi_ticket。
 
+### 怎么使用
+
+在你的项目建立一个公开目录，把上面的代码全部放进去，例如
+
+    http://www.****.com/wxjssdk/
+
 ### 配置开发者ID
 
 打开 config.php 修改 CONF_APP_ID 与 CONF_APP_SECRET，不知道填什么？去你的公众平台去找吧！
